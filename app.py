@@ -24,12 +24,18 @@ def get_animals():
                     mimetype="application/json",
                     status = 400
                 )
-        else:
+        elif(db.get_animals()):
             return Response (
                 json.dumps(db.get_animals(), default=str),
                 mimetype="application/json",
                 status = 200
-            )            
+            )
+        else:
+            return Response (
+                "No content",
+                mimetype="application/json",
+                status = 404
+            )      
     elif(request.method == "POST"):
         _common_name = request.form["common_name"]
         _scientific_name = request.form["scientific_name"]

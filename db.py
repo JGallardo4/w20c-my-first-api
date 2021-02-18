@@ -46,7 +46,7 @@ def put(command, arguments=[]):
             connection.close()
 
 def get_animals():
-    return get("SELECT * FROM Animals")
+    return get("SELECT * FROM Animals WHERE Id IN (?)", [20])
     
 def get_animal(id):
     return get("SELECT * FROM Animals WHERE Id IN (?)", [id])
