@@ -44,17 +44,17 @@ def get_animals():
     elif(request.method == "PATCH"):
         print(request)
 
-        _id = request.form.get("id")
-        _common_name = request.form.get("common_name")
-        _scientific_name = request.form.get("scientific_name")        
+        _id = request.form["id"]
+        _common_name = request.form["common_name"]
+        _scientific_name = request.form["scientific_name"  ]     
 
         db.updateAnimal(_id, _common_name, _scientific_name)
-
-        # return Response(
-        #     "Login Form",
-        #     mimetype = "text/html",
-        #     status = 200
-        # )
+        
+        return Response(
+            json.dumps({'success':True}),
+            mimetype = "application/json",
+            status = 200
+        )
 
     elif(request.method == "DELETE"):
         print(request)
