@@ -21,7 +21,7 @@ def get_animals():
                 print(e)
                 return Response (
                     "Bad Request",
-                    mimetype="application/json",
+                    mimetype="text/plain",
                     status = 400
                 )
         elif(db.get_animals()):
@@ -33,9 +33,10 @@ def get_animals():
         else:
             return Response (
                 "No content",
-                mimetype="application/json",
+                mimetype="text/plain",
                 status = 404
-            )      
+            )
+
     elif(request.method == "POST"):
         _common_name = request.form["common_name"]
         _scientific_name = request.form["scientific_name"]
@@ -43,10 +44,11 @@ def get_animals():
         db.create_animal(_common_name, _scientific_name)
 
         return Response(
-            json.dumps({'success':True}),
-            mimetype = "application/json",
+            "New animal added",
+            mimetype = "text/plain",
             status = 200
         )
+
     elif(request.method == "PATCH"):
         _id = request.form["id"]
         _common_name = request.form["common_name"]
@@ -55,8 +57,8 @@ def get_animals():
         db.update_animal(_id, _common_name, _scientific_name)
 
         return Response(
-            json.dumps({'success':True}),
-            mimetype = "application/json",
+            "Animal updated",
+            mimetype = "text/plain",
             status = 200
         )
 
@@ -65,7 +67,7 @@ def get_animals():
         db.delete_animal(_id)
 
         return Response(
-            json.dumps({'success':True}),
-            mimetype = "application/json",
+            "Animal deleted",
+            mimetype = "text/plain",
             status = 200
         )
