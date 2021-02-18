@@ -13,7 +13,7 @@ def get_animals():
                 _id = request.form["id"]
                 if _id:
                     return Response(
-                        json.dumps(db.getAnimal(_id), default=str),
+                        json.dumps(db.get_animal(_id), default=str),
                         mimetype="application/json",
                         status = 200
                     )                
@@ -26,7 +26,7 @@ def get_animals():
                 )
         else:
             return Response (
-                json.dumps(db.getAnimals(), default=str),
+                json.dumps(db.get_animals(), default=str),
                 mimetype="application/json",
                 status = 200
             )            
@@ -34,7 +34,7 @@ def get_animals():
         _common_name = request.form["common_name"]
         _scientific_name = request.form["scientific_name"]
 
-        db.createAnimal(_common_name, _scientific_name)
+        db.create_animal(_common_name, _scientific_name)
 
         return Response(
             json.dumps({'success':True}),
@@ -42,14 +42,12 @@ def get_animals():
             status = 200
         )
     elif(request.method == "PATCH"):
-        print(request)
-
         _id = request.form["id"]
         _common_name = request.form["common_name"]
         _scientific_name = request.form["scientific_name"  ]     
 
-        db.updateAnimal(_id, _common_name, _scientific_name)
-        
+        db.update_animal(_id, _common_name, _scientific_name)
+
         return Response(
             json.dumps({'success':True}),
             mimetype = "application/json",
@@ -57,12 +55,11 @@ def get_animals():
         )
 
     elif(request.method == "DELETE"):
-        print(request)
+        _id = request.form["id"]
+        db.delete_animal(_id)
 
-        db.deleteAnimal(request.form.get("id"))
-
-        # return Response(
-        #     "Login Form",
-        #     mimetype = "text/html",
-        #     status = 200
-        # )
+        return Response(
+            json.dumps({'success':True}),
+            mimetype = "application/json",
+            status = 200
+        )

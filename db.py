@@ -45,17 +45,17 @@ def put(command, arguments=[]):
         if (connection != None):        
             connection.close()
 
-def getAnimals():
+def get_animals():
     return get("SELECT * FROM Animals")
     
-def getAnimal(id):
+def get_animal(id):
     return get("SELECT * FROM Animals WHERE Id IN (?)", [id])
 
-def createAnimal(common_name, scientific_name):
+def create_animal(common_name, scientific_name):
     put("INSERT INTO Animals (Common_Name, Scientific_Name) VALUES (?, ?)", [common_name, scientific_name])
 
-def updateAnimal(id, common_name, scientific_name):
+def update_animal(id, common_name, scientific_name):
     put("UPDATE Animals SET Common_Name = (?), Scientific_Name = (?) WHERE Id = (?)", [common_name, scientific_name, id])
 
-def deleteAnimal(id):
-    get("DELETE FROM Animals WHERE Id = (?)", [id])
+def delete_animal(id):
+    put("DELETE FROM Animals WHERE Id = (?)", [id])
