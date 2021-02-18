@@ -31,18 +31,16 @@ def get_animals():
                 status = 200
             )            
     elif(request.method == "POST"):
-        print(request)
-
-        _common_name = request.form.get("common_name")
-        _scientific_name = request.form.get("scientific_name")
+        _common_name = request.form["common_name"]
+        _scientific_name = request.form["scientific_name"]
 
         db.createAnimal(_common_name, _scientific_name)
 
-        # return Response(
-        #     Null,
-        #     mimetype = "text/html",
-        #     status = 200
-        # )
+        return Response(
+            json.dumps({'success':True}),
+            mimetype = "application/json",
+            status = 200
+        )
     elif(request.method == "PATCH"):
         print(request)
 
